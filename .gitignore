@@ -1,5 +1,6 @@
-build // transpiled code
-.nyc_output/ // code Coverage
+build
+.nyc_output
+coverage/
 .babelrc
 node_modules
 .eslintrc

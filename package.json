@@ -9,7 +9,9 @@
     "format": "prettier --no-semi --single-quote --write '*.js' 'src/**/*.js' 'test/**/*.js' && standard --fix '*.js' 'src/**/*.js' 'test/**/*.js'",
     "lint": "standard 'src/**/*.js' 'test/**/*.js'",
     "test": "mocha --compilers js:babel-core/register",
-    "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test"
+    "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test",
+    "precommit": "yarn lint",
+    "prepush": "yarn lint"
   },
   "dependencies": {},
   "nyc": {

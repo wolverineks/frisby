@@ -1,0 +1,42 @@
+{
+  "name": "Frisby",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "<wolverine.ks@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "precommit": "yarn lint",
+    "format": "prettier --no-semi --single-quote --write '*.js' 'src/**/*.js' 'test/**/*.js' && standard --fix '*.js' 'src/**/*.js' 'test/**/*.js'",
+    "lint": "standard 'src/**/*.js' 'test/**/*.js'",
+    "test": "mocha --compilers js:babel-core/register",
+    "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test"
+  },
+  "dependencies": {},
+  "nyc": {
+    "exclude": [
+      "test",
+      "build",
+      ".eslintrc.js"
+    ]
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.0",
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
+    "prettier": "^1.5.3",
+    "standard": "^10.0.2"
+  },
+  "babel": {
+    "presets": [
+      "stage-3",
+      "latest"
+    ]
+  }
+}

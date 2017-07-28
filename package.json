@@ -5,12 +5,11 @@
   "author": "<wolverine.ks@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "precommit": "yarn lint",
     "format": "prettier --no-semi --single-quote --write '*.js' 'src/**/*.js' 'test/**/*.js' && standard --fix '*.js' 'src/**/*.js' 'test/**/*.js'",
     "lint": "standard 'src/**/*.js' 'test/**/*.js'",
     "test": "mocha --compilers js:babel-core/register",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test",
-    "precommit": "yarn lint",
+    "precommit": "yarn lint && yarn test",
     "prepush": "yarn lint"
   },
   "dependencies": {},

@@ -1,4 +1,4 @@
-import {Box} from '../01-Linear-Data-Flow'
+import {Box} from './01-Linear-Data-Flow.js'
 
 export const moneyToFloat = (moneyString) =>
   Box(moneyString)

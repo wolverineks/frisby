@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
-import * as Linear from '../src/01-Linear-Data-Flow'
+import * as Linear from '../src/01-Linear-Data-Flow.js'
 const {
   Box,
   nextCharForNumberString,
@@ -48,7 +48,7 @@ describe('Box', () => {
     })
   })
 
-  describe('fold', () => {
+  describe('unBox', () => {
     it('should have unBox method', () => {
       const box = Box(1)
       expect(box).to.have.respondTo('unBox')

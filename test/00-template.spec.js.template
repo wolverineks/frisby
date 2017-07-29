@@ -1,0 +1,8 @@
+import { expect } from 'chai'
+import { describe, it } from 'mocha'
+import * as Module from '../src/NN-XXXXXXXXXXX.js'
+const {} = Module
+
+describe('Something', () => {
+  it('should do something', () => {})
+})

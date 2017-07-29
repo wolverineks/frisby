@@ -8,8 +8,5 @@ module.exports = {
     'prefer-const': 'error',
     'promise/always-return': 'error',
     'promise/no-return-wrap': 'error'
-  },
-  globals: [
-    'describe', 'it', 'expect'
-  ]
+  }
 }

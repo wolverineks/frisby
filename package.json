@@ -10,7 +10,7 @@
     "test": "mocha --compilers js:babel-core/register",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test",
     "precommit": "yarn lint && yarn test",
-    "prepush": "yarn lint"
+    "prepush": "yarn lint && yarn test"
   },
   "dependencies": {},
   "nyc": {

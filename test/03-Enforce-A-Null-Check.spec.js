@@ -7,19 +7,19 @@ const {
   findColor
 } = Refactor
 
-describe('Right', () => {
-  it('should be an object', () => {
+describe('Right', function () {
+  it('should be an object', function () {
     const box = Right(1)
     expect(box).to.be.an.instanceof(Object)
   })
 
-  describe('map', () => {
-    it('should have map method', () => {
+  describe('map', function () {
+    it('should have map method', function () {
       const box = Right(1)
       expect(box).to.have.respondTo('map')
     })
 
-    it('should return a Right version of the result of applying the given function to the state', () => {
+    it('should return a Right version of the result of applying the given function to the state', function () {
       const right = Right(1)
       const expected = 2
       const addOne = (x) => { return x + 1 }
@@ -29,13 +29,13 @@ describe('Right', () => {
     })
   })
 
-  describe('fold', () => {
-    it('should have fold method', () => {
+  describe('fold', function () {
+    it('should have fold method', function () {
       const right = Right(1)
       expect(right).to.have.respondTo('fold')
     })
 
-    it('should return the value after applying the second function', () => {
+    it('should return the value after applying the second function', function () {
       const x = 1
       const right = Right(x)
       const expected = x + 1
@@ -47,13 +47,13 @@ describe('Right', () => {
     })
   })
 
-  describe('unBox', () => {
-    it('should have unBox method', () => {
+  describe('unBox', function () {
+    it('should have unBox method', function () {
       const right = Right(1)
       expect(right).to.have.respondTo('unBox')
     })
 
-    it('should return the value of the right', () => {
+    it('should return the value of the right', function () {
       const right = Right(1)
       const expected = 1
       const actual = right.unBox()
@@ -63,19 +63,19 @@ describe('Right', () => {
   })
 })
 
-describe('Left', () => {
-  it('should be an object', () => {
+describe('Left', function () {
+  it('should be an object', function () {
     const box = Left(1)
     expect(box).to.be.an.instanceof(Object)
   })
 
-  describe('map', () => {
-    it('should have map method', () => {
+  describe('map', function () {
+    it('should have map method', function () {
       const box = Left(1)
       expect(box).to.have.respondTo('map')
     })
 
-    it('should return a Left without applying the given function to the state', () => {
+    it('should return a Left without applying the given function to the state', function () {
       const right = Left(1)
       const expected = 1
       const addOne = (x) => x + 1
@@ -85,13 +85,13 @@ describe('Left', () => {
     })
   })
 
-  describe('fold', () => {
-    it('should have fold method', () => {
+  describe('fold', function () {
+    it('should have fold method', function () {
       const right = Left(1)
       expect(right).to.have.respondTo('fold')
     })
 
-    it('should return the value after applying the first function', () => {
+    it('should return the value after applying the first function', function () {
       const right = Left(1)
       const expected = 'error'
       const addOne = (x) => x + 1
@@ -102,13 +102,13 @@ describe('Left', () => {
     })
   })
 
-  describe('unBox', () => {
-    it('should have unBox method', () => {
+  describe('unBox', function () {
+    it('should have unBox method', function () {
       const right = Left(1)
       expect(right).to.have.respondTo('unBox')
     })
 
-    it('should return the value of the right', () => {
+    it('should return the value of the right', function () {
       const right = Left(1)
       const expected = 1
       const actual = right.unBox()
@@ -118,9 +118,9 @@ describe('Left', () => {
   })
 })
 
-describe('findColor', () => {
-  describe('when found', () => {
-    it('should return Box version of the corresponding value', () => {
+describe('findColor', function () {
+  describe('when found', function () {
+    it('should return Box version of the corresponding value', function () {
       const found = (string) => string.toUpperCase()
       const notFound = () => 'not found'
       const expected = 'ROJO'
@@ -130,8 +130,8 @@ describe('findColor', () => {
     })
   })
 
-  describe('when not found', () => {
-    it('should return the corresponding value', () => {
+  describe('when not found', function () {
+    it('should return the corresponding value', function () {
       const found = (string) => string.toUpperCase()
       const notFound = () => 'not found'
       const expected = 'not found'

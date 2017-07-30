@@ -10,19 +10,19 @@ const {
   fromCharCode
 } = Linear
 
-describe('Box', () => {
-  it('should be an object', () => {
+describe('Box', function () {
+  it('should be an object', function () {
     const box = Box(1)
     expect(box).to.be.an.instanceof(Object)
   })
 
-  describe('map', () => {
-    it('should have map method', () => {
+  describe('map', function () {
+    it('should have map method', function () {
       const box = Box(1)
       expect(box).to.have.respondTo('map')
     })
 
-    it('should return a boxed version of the result of applying the given function to the state', () => {
+    it('should return a boxed version of the result of applying the given function to the state', function () {
       const box = Box(1)
       const expected = 2
       const addOne = (x) => { return x + 1 }
@@ -32,13 +32,13 @@ describe('Box', () => {
     })
   })
 
-  describe('fold', () => {
-    it('should have fold method', () => {
+  describe('fold', function () {
+    it('should have fold method', function () {
       const box = Box(1)
       expect(box).to.have.respondTo('fold')
     })
 
-    it('should return the value after applying the given function', () => {
+    it('should return the value after applying the given function', function () {
       const box = Box(1)
       const expected = 2
       const addOne = (x) => { return x + 1 }
@@ -48,13 +48,13 @@ describe('Box', () => {
     })
   })
 
-  describe('unBox', () => {
-    it('should have unBox method', () => {
+  describe('unBox', function () {
+    it('should have unBox method', function () {
       const box = Box(1)
       expect(box).to.have.respondTo('unBox')
     })
 
-    it('should return the value of the box', () => {
+    it('should return the value of the box', function () {
       const box = Box(1)
       const expected = 1
       const actual = box.unBox()
@@ -63,14 +63,14 @@ describe('Box', () => {
     })
   })
 
-  describe('equals', () => {
-    it('should have equals method', () => {
+  describe('equals', function () {
+    it('should have equals method', function () {
       const box = Box(1)
       expect(box).to.have.respondTo('equals')
     })
 
-    describe('when unequal', () => {
-      it('should compare the values of two boxes', () => {
+    describe('when unequal', function () {
+      it('should compare the values of two boxes', function () {
         const boxOne = Box(1)
         const boxTwo = Box(2)
         const expected = false
@@ -80,8 +80,8 @@ describe('Box', () => {
       })
     })
 
-    describe('when equal', () => {
-      it('should compare the values of two boxes', () => {
+    describe('when equal', function () {
+      it('should compare the values of two boxes', function () {
         const boxOneA = Box(1)
         const boxOneB = Box(1)
         const expected = true
@@ -93,8 +93,8 @@ describe('Box', () => {
   })
 })
 
-describe('nextCharForNumberString', () => {
-  it('should return char given a string number', () => {
+describe('nextCharForNumberString', function () {
+  it('should return char given a string number', function () {
     const expected = 'A'
     const actual = nextCharForNumberString(' 64 ')
 
@@ -102,8 +102,8 @@ describe('nextCharForNumberString', () => {
   })
 })
 
-describe('trim', () => {
-  it('should trim leading and trailing spaces', () => {
+describe('trim', function () {
+  it('should trim leading and trailing spaces', function () {
     const expected = 'A'
     const actual = trim('  A  ')
 
@@ -111,8 +111,8 @@ describe('trim', () => {
   })
 })
 
-describe('parseInt', () => {
-  it('should return number version of a string', () => {
+describe('parseInt', function () {
+  it('should return number version of a string', function () {
     const expected = 12
     const actual = parse('12')
 
@@ -120,8 +120,8 @@ describe('parseInt', () => {
   })
 })
 
-describe('increment', () => {
-  it('should return next integer', () => {
+describe('increment', function () {
+  it('should return next integer', function () {
     const expected = 2
     const actual = increment(1)
 
@@ -129,8 +129,8 @@ describe('increment', () => {
   })
 })
 
-describe('fromCharCode', () => {
-  it('should return character from integer', () => {
+describe('fromCharCode', function () {
+  it('should return character from integer', function () {
     const expected = 'A'
     const actual = fromCharCode('65')
 

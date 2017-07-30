@@ -10,22 +10,22 @@ const {
   applyDiscount
 } = Refactor
 
-describe('stripDollarSign', () => {
-  it('should strip dollar signs at the start of a string', () => {
+describe('stripDollarSign', function () {
+  it('should strip dollar signs at the start of a string', function () {
     const target = '123123123'
     const start = '$' + target
 
     expect(stripDollarSign(start)).to.equal(target)
   })
 
-  it('should strip dollar signs at the middle of a string', () => {
+  it('should strip dollar signs at the middle of a string', function () {
     const target = '123123123'
     const middle = target.slice(0, 4) + '$' + target.slice(4, target.length)
 
     expect(stripDollarSign(middle)).to.equal(target)
   })
 
-  it('should strip dollar signs at the end of a string', () => {
+  it('should strip dollar signs at the end of a string', function () {
     const target = '123123123'
     const end = target + '$'
 
@@ -33,22 +33,22 @@ describe('stripDollarSign', () => {
   })
 })
 
-describe('stripPercentSign', () => {
-  it('should strip percent signs at the start of a string', () => {
+describe('stripPercentSign', function () {
+  it('should strip percent signs at the start of a string', function () {
     const target = '123123123'
     const start = '%' + target
 
     expect(stripPercentSign(start)).to.equal(target)
   })
 
-  it('should strip percent signs at the middle of a string', () => {
+  it('should strip percent signs at the middle of a string', function () {
     const target = '123123123'
     const middle = target.slice(0, 4) + '%' + target.slice(4, target.length)
 
     expect(stripPercentSign(middle)).to.equal(target)
   })
 
-  it('should strip percent signs at the end of a string', () => {
+  it('should strip percent signs at the end of a string', function () {
     const target = '123123123'
     const end = target + '%'
 
@@ -56,8 +56,8 @@ describe('stripPercentSign', () => {
   })
 })
 
-describe('percentToFloat', () => {
-  it('should convert a moneyString to a float', () => {
+describe('percentToFloat', function () {
+  it('should convert a moneyString to a float', function () {
     const before = '20%'
     const after = 0.20
     const result = percentToFloat(before).unBox()
@@ -66,8 +66,8 @@ describe('percentToFloat', () => {
   })
 })
 
-describe('moneyToFloat', () => {
-  it('should convert a moneyString to a float', () => {
+describe('moneyToFloat', function () {
+  it('should convert a moneyString to a float', function () {
     const before = '$20.00'
     const after = 20.00
     const result = moneyToFloat(before).unBox()
@@ -76,8 +76,8 @@ describe('moneyToFloat', () => {
   })
 })
 
-describe('percentToPercentDecimal', () => {
-  it('should convert a float to a percentage', () => {
+describe('percentToPercentDecimal', function () {
+  it('should convert a float to a percentage', function () {
     const percent = 20
     const expected = 0.2
     const actual = percentToPercentDecimal(percent)
@@ -86,8 +86,8 @@ describe('percentToPercentDecimal', () => {
   })
 })
 
-describe('applyDiscount', () => {
-  it('should return float after applying discount', () => {
+describe('applyDiscount', function () {
+  it('should return float after applying discount', function () {
     const priceString = '$5.00'
     const discountString = '20%'
     const expected = 4.00

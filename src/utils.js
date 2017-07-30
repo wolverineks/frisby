@@ -22,6 +22,10 @@ export const Left = (x) => ({
   unBox: () => x
 })
 
+export const fromNullable = (x) => {
+  return [undefined, null].includes(x) ? Left(x) : Right(x)
+}
+
 export const tryCatch = (f) => {
   try {
     const result = f()

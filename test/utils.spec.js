@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
-import { Box, Left, Right, tryCatch } from '../src/utils.js'
+import { Box, Left, Right, fromNullable, tryCatch } from '../src/utils.js'
 
 describe('Box', function () {
   it('should be an object', function () {
@@ -235,6 +235,35 @@ describe('Left', function () {
       const left = Left(1)
       const expected = 1
       const actual = left.unBox()
+
+      expect(actual).to.equal(expected)
+    })
+  })
+})
+
+describe('fromNullable', function () {
+  describe('when neither null or undefined', function () {
+    it('should return a Right', function () {
+      const expected = 'Right'
+      const actual = fromNullable(true).getType()
+
+      expect(actual).to.equal(expected)
+    })
+  })
+
+  describe('when null', function () {
+    it('should return a Left', function () {
+      const expected = 'Left'
+      const actual = fromNullable(null).getType()
+
+      expect(actual).to.equal(expected)
+    })
+  })
+
+  describe('when undefined', function () {
+    it('should return a Left', function () {
+      const expected = 'Left'
+      const actual = fromNullable(undefined).getType()
 
       expect(actual).to.equal(expected)
     })

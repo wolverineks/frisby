@@ -8,6 +8,21 @@ describe('Box', function () {
     expect(box).to.be.an.instanceof(Object)
   })
 
+  describe('getType', function () {
+    it('should have getType method', function () {
+      const box = Box(1)
+      expect(box).to.have.respondTo('getType')
+    })
+
+    it('should return the type of the object', function () {
+      const box = Box(1)
+      const expected = 'Box'
+      const actual = box.getType()
+
+      expect(actual).to.equal(expected)
+    })
+  })
+
   describe('map', function () {
     it('should have map method', function () {
       const box = Box(1)
@@ -87,14 +102,29 @@ describe('Box', function () {
 
 describe('Right', function () {
   it('should be an object', function () {
-    const box = Right(1)
-    expect(box).to.be.an.instanceof(Object)
+    const right = Right(1)
+    expect(right).to.be.an.instanceof(Object)
+  })
+
+  describe('getType', function () {
+    it('should have getType method', function () {
+      const right = Right(1)
+      expect(right).to.have.respondTo('getType')
+    })
+
+    it('should return the type of the object', function () {
+      const right = Right(1)
+      const expected = 'Right'
+      const actual = right.getType()
+
+      expect(actual).to.equal(expected)
+    })
   })
 
   describe('map', function () {
     it('should have map method', function () {
-      const box = Right(1)
-      expect(box).to.have.respondTo('map')
+      const right = Right(1)
+      expect(right).to.have.respondTo('map')
     })
 
     it('should return a Right version of the result of applying the given function to the state', function () {
@@ -143,21 +173,36 @@ describe('Right', function () {
 
 describe('Left', function () {
   it('should be an object', function () {
-    const box = Left(1)
-    expect(box).to.be.an.instanceof(Object)
+    const left = Left(1)
+    expect(left).to.be.an.instanceof(Object)
+  })
+
+  describe('getType', function () {
+    it('should have getType method', function () {
+      const left = Right(1)
+      expect(left).to.have.respondTo('getType')
+    })
+
+    it('should return the type of the object', function () {
+      const left = Right(1)
+      const expected = 'Right'
+      const actual = left.getType()
+
+      expect(actual).to.equal(expected)
+    })
   })
 
   describe('map', function () {
     it('should have map method', function () {
-      const box = Left(1)
-      expect(box).to.have.respondTo('map')
+      const left = Left(1)
+      expect(left).to.have.respondTo('map')
     })
 
     it('should return a Left without applying the given function to the state', function () {
-      const right = Left(1)
+      const left = Left(1)
       const expected = 1
       const addOne = (x) => x + 1
-      const actual = right.map(addOne).unBox()
+      const actual = left.map(addOne).unBox()
 
       expect(actual).to.equal(expected)
     })
@@ -165,16 +210,16 @@ describe('Left', function () {
 
   describe('fold', function () {
     it('should have fold method', function () {
-      const right = Left(1)
-      expect(right).to.have.respondTo('fold')
+      const left = Left(1)
+      expect(left).to.have.respondTo('fold')
     })
 
     it('should return the value after applying the first function', function () {
-      const right = Left(1)
+      const left = Left(1)
       const expected = 'error'
       const addOne = (x) => x + 1
       const error = () => expected
-      const actual = right.fold(error, addOne)
+      const actual = left.fold(error, addOne)
 
       expect(actual).to.equal(expected)
     })
@@ -182,14 +227,14 @@ describe('Left', function () {
 
   describe('unBox', function () {
     it('should have unBox method', function () {
-      const right = Left(1)
-      expect(right).to.have.respondTo('unBox')
+      const left = Left(1)
+      expect(left).to.have.respondTo('unBox')
     })
 
-    it('should return the value of the right', function () {
-      const right = Left(1)
+    it('should return the value of the left', function () {
+      const left = Left(1)
       const expected = 1
-      const actual = right.unBox()
+      const actual = left.unBox()
 
       expect(actual).to.equal(expected)
     })

@@ -5,8 +5,8 @@
   "author": "<wolverine.ks@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --no-semi --single-quote --write '*.js' 'src/**/*.js' 'test/**/*.js' && standard --fix '*.js' 'src/**/*.js' 'test/**/*.js'",
-    "lint": "standard 'src/**/*.js' 'test/**/*.js'",
+    "format": "prettier --no-semi --single-quote --write '*.js' 'src/**/*.js' 'test/**/*.js' && eslint --fix '*.js' 'src/**/*.js' 'test/**/*.js'",
+    "lint": "eslint 'src/**/*.js' 'test/**/*.js'",
     "test": "mocha --compilers js:babel-core/register",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test",
     "precommit": "yarn lint && yarn test",
@@ -26,6 +26,7 @@
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",

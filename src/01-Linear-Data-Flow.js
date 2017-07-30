@@ -1,10 +1,4 @@
-export const Box = (x) => ({
-  map: (f) => Box(f(x)),
-  fold: (f) => f(x),
-  unBox: () => x,
-  equals: function (y) { return this.unBox() === y.unBox() }
-})
-
+import { Box } from './utils.js'
 // original
 // export const nextCharForNumberString = (string) => {
 //   const trimmed = string.trim()

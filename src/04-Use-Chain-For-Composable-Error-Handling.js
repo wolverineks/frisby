@@ -1,3 +1,4 @@
+// @flow
 import fs from 'fs'
 import { Right, tryCatch } from './utils.js'
 // export const getPort = (filepath) => {
@@ -11,7 +12,7 @@ import { Right, tryCatch } from './utils.js'
 //   }
 // }
 
-export const getPort = (filepath) => {
+export const getPort = (filepath: string) => {
   const DEFAULT_PORT = 3000
   const readFile = () => tryCatch(() => fs.readFileSync(filepath))
   const parse = (configString) => tryCatch(() => JSON.parse(configString))

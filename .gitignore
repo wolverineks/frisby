@@ -4,3 +4,4 @@ coverage/
 .babelrc
 node_modules
 .eslintrc
+lib

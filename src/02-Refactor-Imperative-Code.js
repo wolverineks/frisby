@@ -1,21 +1,22 @@
+// @flow
 import { Box } from './utils.js'
 
-export const moneyToFloat = (moneyString) =>
+export const moneyToFloat = (moneyString: string) =>
   Box(moneyString)
     .map(stripDollarSign)
     .map(parseFloat)
 
-export const percentToFloat = (percentString) =>
+export const percentToFloat = (percentString: string) =>
   Box(percentString)
     .map(stripPercentSign)
     .map(parseFloat)
     .map(percentToPercentDecimal)
 
-export const stripDollarSign = (moneyString) => moneyString.replace(/\$/g, '')
-export const stripPercentSign = (percentString) => percentString.replace(/%/g, '')
-export const percentToPercentDecimal = (float) => float / 100
+export const stripDollarSign = (moneyString: string) => moneyString.replace(/\$/g, '')
+export const stripPercentSign = (percentString: string) => percentString.replace(/%/g, '')
+export const percentToPercentDecimal = (float: number) => float / 100
 
-export const applyDiscount = (priceString, discountString) =>
+export const applyDiscount = (priceString: string, discountString: string) =>
   moneyToFloat(priceString)
     .fold(priceFloat =>
       percentToFloat(discountString)

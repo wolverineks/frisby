@@ -16,7 +16,7 @@ describe('getPort', function () {
 
     describe('when corrupt file found', function () {
       it('should return default port number', function () {
-        const filepath = './src/corrupt-config.json'
+        const filepath = './test/corrupt-config.json'
         const expected = 3000
         const actual = getPort(filepath)
 
@@ -27,7 +27,7 @@ describe('getPort', function () {
 
   describe('onSuccess', function () {
     it('should return number of port', function () {
-      const filepath = './src/config.json'
+      const filepath = './test/config.json'
       const expected = 8888
       const actual = getPort(filepath)
 

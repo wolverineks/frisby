@@ -1,3 +1,4 @@
+// @flow
 import { Box } from './utils.js'
 // original
 // export const nextCharForNumberString = (string) => {
@@ -7,7 +8,7 @@ import { Box } from './utils.js'
 //   return String.fromCharCode(nextNumber)
 // }
 
-export const nextCharForNumberString = (string) => {
+export const nextCharForNumberString = (string: string): mixed => {
   return Box(string)
     .map(trim)
     .map(parse)
@@ -16,7 +17,7 @@ export const nextCharForNumberString = (string) => {
     .unBox()
 }
 
-export const trim = (string) => string.trim()
-export const parse = (string) => parseInt(string)
-export const increment = (number) => number + 1
-export const fromCharCode = (number) => String.fromCharCode(number)
+export const trim = (string: string) => string.trim()
+export const parse = (string: string) => parseInt(string)
+export const increment = (number: number) => number + 1
+export const fromCharCode = (number: number) => String.fromCharCode(number)

@@ -1,0 +1,10 @@
+[ignore]
+.*/test/.*
+.*/lib/**.*
+[include]
+
+[libs]
+
+[options]
+
+[lints]

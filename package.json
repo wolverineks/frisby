@@ -7,10 +7,12 @@
   "scripts": {
     "format": "prettier --no-semi --single-quote --write '*.js' 'src/**/*.js' 'test/**/*.js' && eslint --fix '*.js' 'src/**/*.js' 'test/**/*.js'",
     "lint": "eslint 'src/**/*.js' 'test/**/*.js'",
-    "test": "mocha --compilers js:babel-core/register",
+    "test": "mocha",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test",
     "precommit": "yarn lint && yarn test",
-    "prepush": "yarn lint && yarn test"
+    "prepush": "yarn lint && yarn test",
+    "build": "babel src/ -d lib/",
+    "flow": "flow"
   },
   "dependencies": {},
   "nyc": {
@@ -21,10 +23,14 @@
     ]
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
     "chai": "^4.1.0",
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-promise": "^3.5.0",
@@ -38,7 +44,8 @@
   "babel": {
     "presets": [
       "stage-3",
-      "latest"
+      "latest",
+      "flow"
     ]
   }
 }

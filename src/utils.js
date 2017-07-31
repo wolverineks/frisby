@@ -1,32 +1,33 @@
-export const Box = (x) => ({
+// @flow
+export const Box = (x: any) => ({
   getType: () => 'Box',
-  map: (f) => Box(f(x)),
-  fold: (f) => f(x),
+  map: (f: (x) => any) => Box(f(x)),
+  fold: (f: (x: any) => any) => f(x),
   unBox: () => x,
-  equals: function (y) { return this.unBox() === y.unBox() }
+  equals: function (y: Box) { return this.unBox() === y.unBox() }
 })
 
-export const Right = (x) => ({
+export const Right = (x: any) => ({
   getType: () => 'Right',
-  chain: (f) => f(x),
-  map: (f) => Right(f(x)), // normal map
-  fold: (e, f) => f(x), // run happy-path callback
+  chain: (f: (any) => any) => f(x),
+  map: (f: (any) => any) => Right(f(x)), // normal map
+  fold: (e: (any) => any, f: (any) => any) => f(x), // run happy-path callback
   unBox: () => x
 })
 
-export const Left = (x) => ({
+export const Left = (x: any) => ({
   getType: () => 'Left',
-  chain: (f) => Left(x), // no-op
-  map: (f) => Left(x), // no-op
-  fold: (e, f) => e(x), // run error callback
+  chain: (f: (any) => any) => Left(x), // no-op
+  map: (f: (any) => any) => Left(x), // no-op
+  fold: (e: (any) => any, f: (any) => any) => e(x), // run error callback
   unBox: () => x
 })
 
-export const fromNullable = (x) => {
+export const fromNullable = (x: any): any => {
   return [undefined, null].includes(x) ? Left(x) : Right(x)
 }
 
-export const tryCatch = (f) => {
+export const tryCatch = (f: () => any): Right | Left => {
   try {
     const result = f()
     return Right(result)

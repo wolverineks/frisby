@@ -1,6 +1,6 @@
 module.exports = {
-  extends: 'standard',
-  plugins: ['standard', 'promise', 'mocha'],
+  extends: ['standard', 'plugin:flowtype/recommended'],
+  plugins: ['standard', 'promise', 'mocha', 'flowtype'],
   rules: {
     camelcase: 'error',
     'no-throw-literal': 'error',

@@ -1,3 +1,4 @@
+// @flow
 import { Right, fromNullable } from './utils.js'
 
 // export const openSite = (currentUser) => {
@@ -8,7 +9,7 @@ import { Right, fromNullable } from './utils.js'
 //   }
 // }
 
-export const openSite = (currentUser) =>
+export const openSite = (currentUser: {}) =>
   fromNullable(currentUser)
     .fold(showLogin, renderPage)
 const showLogin = () => 'Please login'
@@ -22,7 +23,7 @@ const renderPage = (currentUser) => `Hello ${currentUser.username}`
 //   }
 // }
 
-export const getPrefs = (user) =>
+export const getPrefs = (user: { preferences: string }) =>
   new Right(user)
     .chain(getPremiumStatus)
     .fold(loadDefaultPrefs, () => loadUserPrefs(user))
@@ -43,7 +44,7 @@ const loadUserPrefs = (user) => user.preferences
 //   return 'no street'
 // }
 
-export const getStreetName = (user) =>
+export const getStreetName = (user: { address: {} }) =>
   new Right(user)
     .chain(getAddress)
     .chain(getStreet)

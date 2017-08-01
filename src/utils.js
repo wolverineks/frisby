@@ -1,5 +1,5 @@
 // @flow
-export const Box = (x: any) => ({
+export const Box = (x: any): {getType: Function, map: Function, fold: Function, unBox: Function} => ({
   getType: () => 'Box',
   map: (f: (x) => any) => Box(f(x)),
   fold: (f: (x: any) => any) => f(x),
@@ -7,7 +7,7 @@ export const Box = (x: any) => ({
   equals: function (y: Box) { return this.unBox() === y.unBox() }
 })
 
-export const Right = (x: any) => ({
+export const Right = (x: any): {getType: Function, chain: Function, map: Function, fold: Function, unBox: Function} => ({
   getType: () => 'Right',
   chain: (f: (any) => any) => f(x),
   map: (f: (any) => any) => Right(f(x)), // normal map
@@ -15,7 +15,7 @@ export const Right = (x: any) => ({
   unBox: () => x
 })
 
-export const Left = (x: any) => ({
+export const Left = (x: any): {getType: Function, chain: Function, map: Function, fold: Function, unBox: Function} => ({
   getType: () => 'Left',
   chain: (f: (any) => any) => Left(x), // no-op
   map: (f: (any) => any) => Left(x), // no-op
@@ -23,11 +23,11 @@ export const Left = (x: any) => ({
   unBox: () => x
 })
 
-export const fromNullable = (x: any): any => {
+export const fromNullable = (x: any): {getType: Function, chain: Function, map: Function, fold: Function, unBox: Function} => {
   return [undefined, null].includes(x) ? Left(x) : Right(x)
 }
 
-export const tryCatch = (f: () => any): Right | Left => {
+export const tryCatch = (f: () => any): {getType: Function, chain: Function, map: Function, fold: Function, unBox: Function} => {
   try {
     const result = f()
     return Right(result)

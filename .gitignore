@@ -1,7 +1,4 @@
 build
 .nyc_output
-coverage/
-.babelrc
 node_modules
-.eslintrc
 lib

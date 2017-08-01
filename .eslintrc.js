@@ -1,6 +1,12 @@
 module.exports = {
   extends: ['standard', 'plugin:flowtype/recommended'],
   plugins: ['standard', 'promise', 'mocha', 'flowtype'],
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true
+    }
+  },
   rules: {
     camelcase: 'error',
     'no-throw-literal': 'error',

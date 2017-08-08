@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>28/28</span>
+        <span class='fraction'>43/43</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>20/20</span>
+        <span class='fraction'>32/32</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>25/25</span>
+        <span class='fraction'>36/36</span>
       </div>
     </div>
   </div>
@@ -80,7 +80,29 @@
 35
 36
 37
-38</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">34x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">15x</span>
@@ -89,36 +111,58 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">50x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// @flow
-export const Box = (x: any) =&gt; ({
+export const Box = (x: any): {getType: Function, map: Function, fold: Function, unBox: Function} =&gt; ({
   getType: () =&gt; 'Box',
   map: (f: (x) =&gt; any) =&gt; Box(f(x)),
   fold: (f: (x: any) =&gt; any) =&gt; f(x),
@@ -126,7 +170,7 @@ export const Box = (x: any) =&gt; ({
   equals: function (y: Box) { return this.unBox() === y.unBox() }
 })
 &nbsp;
-export const Right = (x: any) =&gt; ({
+export const Right = (x: any): {getType: Function, chain: Function, map: Function, fold: Function, unBox: Function} =&gt; ({
   getType: () =&gt; 'Right',
   chain: (f: (any) =&gt; any) =&gt; f(x),
   map: (f: (any) =&gt; any) =&gt; Right(f(x)), // normal map
@@ -134,7 +178,7 @@ export const Right = (x: any) =&gt; ({
   unBox: () =&gt; x
 })
 &nbsp;
-export const Left = (x: any) =&gt; ({
+export const Left = (x: any): {getType: Function, chain: Function, map: Function, fold: Function, unBox: Function} =&gt; ({
   getType: () =&gt; 'Left',
   chain: (f: (any) =&gt; any) =&gt; Left(x), // no-op
   map: (f: (any) =&gt; any) =&gt; Left(x), // no-op
@@ -142,11 +186,11 @@ export const Left = (x: any) =&gt; ({
   unBox: () =&gt; x
 })
 &nbsp;
-export const fromNullable = (x: any): any =&gt; {
+export const fromNullable = (x: any): {getType: Function, chain: Function, map: Function, fold: Function, unBox: Function} =&gt; {
   return [undefined, null].includes(x) ? Left(x) : Right(x)
 }
 &nbsp;
-export const tryCatch = (f: () =&gt; any): Right | Left =&gt; {
+export const tryCatch = (f: () =&gt; any): {getType: Function, chain: Function, map: Function, fold: Function, unBox: Function} =&gt; {
   try {
     const result = f()
     return Right(result)
@@ -154,13 +198,35 @@ export const tryCatch = (f: () =&gt; any): Right | Left =&gt; {
     return Left(e)
   }
 }
+&nbsp;
+export const Sum = (value: number): {getType: Function, value: number, concat: Function} =&gt; ({
+  getType: (): string =&gt; 'Sum',
+  value,
+  concat: (other: {getType: Function, value: number, concat: Function}): {getType: Function, value: number, concat: Function} =&gt; {
+    return Sum(value + other.value)
+  }
+})
+&nbsp;
+export const All = (value: boolean): {getType: Function, value: boolean, concat: Function} =&gt; ({
+  getType: (): string =&gt; 'All',
+  value,
+  concat: (other: {getType: Function, value: boolean, concat: Function}): {getType: Function, value: boolean, concat: Function} =&gt; All(value &amp;&amp; other.value)
+})
+&nbsp;
+export const First = (value: string): {getType: Function, value: string, concat: Function} =&gt; ({
+  getType: (): string =&gt; 'First',
+  value,
+  concat: (other: {getType: Function, value: string, concat: Function}): {getType: Function, value: string, concat: Function} =&gt; {
+    return First(value)
+  }
+})
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Jul 30 2017 18:03:02 GMT-0700 (PDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Aug 07 2017 21:28:44 GMT-0700 (PDT)
 </div>
 </div>
 <script src="prettify.js"></script>

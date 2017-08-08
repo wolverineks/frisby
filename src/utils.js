@@ -43,12 +43,14 @@ export const Sum = (value: number): {getType: Function, value: number, concat: F
     return Sum(value + other.value)
   }
 })
+Sum.empty = () => Sum(0)
 
 export const All = (value: boolean): {getType: Function, value: boolean, concat: Function} => ({
   getType: (): string => 'All',
   value,
   concat: (other: {getType: Function, value: boolean, concat: Function}): {getType: Function, value: boolean, concat: Function} => All(value && other.value)
 })
+All.empty = () => All(true)
 
 export const First = (value: string): {getType: Function, value: string, concat: Function} => ({
   getType: (): string => 'First',

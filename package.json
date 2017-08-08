@@ -8,6 +8,7 @@
     "format": "prettier --no-semi --single-quote --write '*.js' 'src/**/*.js' 'test/**/*.js' && eslint --fix '*.js' 'src/**/*.js' 'test/**/*.js'",
     "lint": "eslint 'src/**/*.js' 'test/**/*.js'",
     "test": "yarn lint && mocha",
+    "watch": "yarn lint && mocha -w",
     "test:no-lint": "mocha",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test",
     "precommit": "yarn lint && yarn test",

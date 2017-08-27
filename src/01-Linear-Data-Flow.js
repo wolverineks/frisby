@@ -1,5 +1,5 @@
 // @flow
-import { Box } from './utils.js'
+import { Box } from './types/index.js'
 // original
 // export const nextCharForNumberString = (string) => {
 //   const trimmed = string.trim()

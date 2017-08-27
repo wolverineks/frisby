@@ -1,6 +1,8 @@
 // @flow
 import fs from 'fs'
-import { Right, tryCatch } from './utils.js'
+import { tryCatch } from './utils.js'
+import { Right } from './types/index.js'
+
 // export const getPort = (filepath) => {
 //   try {
 //     const configString = fs.readFileSync(filepath)

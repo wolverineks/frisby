@@ -1,5 +1,5 @@
 // @flow
-import { Box } from './utils.js'
+import { Box } from './types/index.js'
 
 export const moneyToFloat = (moneyString: string) =>
   Box(moneyString)

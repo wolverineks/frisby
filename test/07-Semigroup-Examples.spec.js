@@ -1,7 +1,7 @@
 // @flow
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
-import { All, First, Sum } from '../src/utils.js'
+import { All, First, Sum } from '../src/types/index.js'
 import { Map } from 'immutable-ext'
 
 describe('concat', function () {

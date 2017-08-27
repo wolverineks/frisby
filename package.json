@@ -7,8 +7,8 @@
   "scripts": {
     "format": "prettier --no-semi --single-quote --write '*.js' 'src/**/*.js' 'test/**/*.js' && eslint --fix '*.js' 'src/**/*.js' 'test/**/*.js'",
     "lint": "eslint 'src/**/*.js' 'test/**/*.js'",
-    "test": "yarn lint && flow && mocha",
-    "watch": "yarn lint && flow && mocha -w",
+    "test": "yarn lint && flow && mocha 'test/**/*.js'",
+    "watch": "yarn test -- -w",
     "test:no-lint": "mocha",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html --extension .js yarn test",
     "precommit": "yarn test",

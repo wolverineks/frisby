@@ -1,5 +1,6 @@
 // @flow
-import { Right, Left, fromNullable, tryCatch } from './utils.js'
+import { fromNullable, tryCatch } from './utils.js'
+import { Right, Left } from './types/index.js'
 import fs from 'fs'
 
 // export const openSite = (currentUser) => {

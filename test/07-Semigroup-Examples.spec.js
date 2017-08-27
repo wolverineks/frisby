@@ -1,3 +1,4 @@
+// @flow
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
 import { All, First, Sum } from '../src/utils.js'
@@ -13,7 +14,7 @@ describe('concat', function () {
     const expectedPoints = 12
     const expectedFriends = ['Franklin', 'Gatsby']
 
-    const result = acct1.concat(acct2).toJS()
+    const result: { name: { value: string }, isPaid: { value: boolean }, points: { value: number }, friends: Array<string> } = acct1.concat(acct2).toJS()
     const name = result.name.value
     const isPaid = result.isPaid.value
     const points = result.points.value

@@ -1,3 +1,4 @@
+// @flow
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
 import { getPort } from '../src/04-Use-Chain-For-Composable-Error-Handling.js'

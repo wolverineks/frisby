@@ -1,3 +1,4 @@
+// @flow
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
 import * as Examples from '../src/05-A-Collection-Of-Either-Examples.js'
@@ -28,8 +29,8 @@ describe('openSite', function () {
 describe('getPrefs', function () {
   describe('when user is premium', function () {
     it('should return user preferences', function () {
-      const currentUser = { username: 'John123', premium: true, preferences: true }
-      const expected = true
+      const currentUser = { username: 'John123', premium: true, preferences: 'user preferences' }
+      const expected = 'user preferences'
       const actual = getPrefs(currentUser)
 
       expect(actual).to.equal(expected)
@@ -38,7 +39,7 @@ describe('getPrefs', function () {
 
   describe('when user is not premium', function () {
     it('should return the default preferences', function () {
-      const currentUser = { username: 'John123', premium: undefined, preferences: true }
+      const currentUser = { username: 'John123', premium: undefined, preferences: 'user preferences' }
       const expected = 'DEFAULT_PREFERENCES'
       const actual = getPrefs(currentUser)
 
@@ -172,7 +173,7 @@ describe('parseUrl', function () {
     it('should return the url', function () {
       const config = '{"url": "www.example.com"}'
       const expected = 'www.example.com'
-      const actual = parseUrl(config)[0]
+      const actual = parseUrl(config)
 
       expect(actual).to.equal(expected)
     })

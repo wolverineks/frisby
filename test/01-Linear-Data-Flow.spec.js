@@ -1,3 +1,4 @@
+// @flow
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
 import * as Linear from '../src/01-Linear-Data-Flow.js'
@@ -48,7 +49,7 @@ describe('increment', function () {
 describe('fromCharCode', function () {
   it('should return character from integer', function () {
     const expected = 'A'
-    const actual = fromCharCode('65')
+    const actual = fromCharCode(65)
 
     expect(actual).to.equal(expected)
   })

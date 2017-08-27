@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><link rel="stylesheet" href="../../assets/semantic.min.css"/><link rel="stylesheet" href="../../assets/codemirror.css"/><link rel="stylesheet" href="../../assets/flow-highlight-source.css"/><link rel="stylesheet" href="../../assets/flow-coverage-report.css"/><link rel="stylesheet" href="../../assets/codemirror-simplescrollbars-addon.css"/><script src="../../assets/jquery-3.1.0.min.js"></script><script src="../../assets/semantic.min.js"></script><script src="../../assets/semantic-tablesort.js"></script><script src="../../assets/codemirror.js"></script><script src="../../assets/codemirror-javascript-mode.js"></script><script src="../../assets/codemirror-annotatescrollbar-addon.js"></script><script src="../../assets/codemirror-simplescrollbars-addon.js"></script><script src="../../assets/flow-highlight-source.js"></script><script src="../../assets/index.js"></script><style>
+.ui .CodeMirror {
+  border: 1px solid rgba(34,36,38,.15);
+  height: auto;
+}
+</style></head><body><div class="ui grid container"><div class="row"><div class="twelve wide column"><h2 class="ui header"><a href="../../index.html" id="link-to-summary">Flow Coverage Report</a></h2></div></div><div class="row"><table class="ui small celled unstackable table"><thead><tr><th class="sorted ascending">Filename</th><th>Percent</th><th>Total</th><th>Covered</th><th>Uncovered</th></tr></thead><tbody><tr class="positive"><td class="">test/05-A-Collection-Of-Either-Examples.spec.js</td><td><span>100 %</span></td><td> 441 </td><td> 441 </td><td> 0 </td></tr></tbody></table></div><div class="row ui one column centered grid"><div class="column" style="text-align:left;"><div class="row"><div class="ui form"><div class="fields"><div class="sixteen wide inline field"><select class="ui search dropdown uncovered-locations"><option value="">Uncovered Locations</option></select></div><div class="four wide inline field"><select class="ui search dropdown syntax-highlighting"><option value="es">ES6/ES7</option><option value="js">JavaScript</option><option value="no">None</option></select></div></div></div></div><textarea id="file-content" readonly="">// @flow
+import { expect } from &#x27;chai&#x27;
+import { describe, it } from &#x27;mocha&#x27;
+import * as Examples from &#x27;../src/05-A-Collection-Of-Either-Examples.js&#x27;
+const { openSite, getPrefs, getStreetName, concatUniq, wrapExample, parseUrl } = Examples
+
+describe(&#x27;openSite&#x27;, function () {
+  describe(&#x27;when user is logged in&#x27;, function () {
+    it(&#x27;should return the login page&#x27;, function () {
+      const currentUser = { username: &#x27;John123&#x27; }
+      const expected = &#x27;Hello John123&#x27;
+      const actual = openSite(currentUser)
+
+      expect(actual).to.equal(expected)
+    })
+  })
+
+  describe(&#x27;when user is not logged in&#x27;, function () {
+    it(&#x27;should return the login page&#x27;, function () {
+      const currentUser = undefined
+      const expected = &#x27;Please login&#x27;
+      const actual = openSite(currentUser)
+
+      expect(actual).to.equal(expected)
+    })
+  })
+})
+
+describe(&#x27;getPrefs&#x27;, function () {
+  describe(&#x27;when user is premium&#x27;, function () {
+    it(&#x27;should return user preferences&#x27;, function () {
+      const currentUser = { username: &#x27;John123&#x27;, premium: true, preferences: &#x27;user preferences&#x27; }
+      const expected = &#x27;user preferences&#x27;
+      const actual = getPrefs(currentUser)
+
+      expect(actual).to.equal(expected)
+    })
+  })
+
+  describe(&#x27;when user is not premium&#x27;, function () {
+    it(&#x27;should return the default preferences&#x27;, function () {
+      const currentUser = { username: &#x27;John123&#x27;, premium: undefined, preferences: &#x27;user preferences&#x27; }
+      const expected = &#x27;DEFAULT_PREFERENCES&#x27;
+      const actual = getPrefs(currentUser)
+
+      expect(actual).to.equal(expected)
+    })
+  })
+})
+
+describe(&#x27;getStreetName&#x27;, function () {
+  describe(&#x27;onError&#x27;, function () {
+    describe(&#x27;when address is undefined&#x27;, function () {
+      it(&#x27;should return \&#x27;no street\&#x27; message&#x27;, function () {
+        const user = { username: &#x27;John&#x27;, address: undefined }
+        const expected = &#x27;no street&#x27;
+        const actual = getStreetName(user)
+
+        expect(actual).to.equal(expected)
+      })
+    })
+
+    describe(&#x27;when street is undefined&#x27;, function () {
+      it(&#x27;should return \&#x27;no street\&#x27; message&#x27;, function () {
+        const user = { username: &#x27;John&#x27;, address: { street: undefined } }
+        const expected = &#x27;no street&#x27;
+        const actual = getStreetName(user)
+
+        expect(actual).to.equal(expected)
+      })
+    })
+  })
+
+  describe(&#x27;onSuccess&#x27;, function () {
+    it(&#x27;should return the street name&#x27;, function () {
+      const user = {
+        username: &#x27;John&#x27;,
+        address: { street: { name: &#x27;Main St.&#x27; } }
+      }
+      const expected = &#x27;Main St.&#x27;
+      const actual = getStreetName(user)
+
+      expect(actual).to.equal(expected)
+    })
+  })
+})
+
+describe(&#x27;concatUniq&#x27;, function () {
+  describe(&#x27;onError&#x27;, function () {
+    describe(&#x27;when item is already in the array&#x27;, function () {
+      it(&#x27;should return the array&#x27;, function () {
+        const array = [1, 2, 3, 4, 5]
+        const item = 3
+        const expected = [1, 2, 3, 4, 5]
+        const actual = concatUniq(item, array)
+
+        expect(actual).to.deep.equal(expected)
+      })
+    })
+  })
+
+  describe(&#x27;onSuccess&#x27;, function () {
+    describe(&#x27;when item is not already in the array&#x27;, function () {
+      it(&#x27;should return the array with the item in it&#x27;, function () {
+        const array = [1, 2, 3, 4, 5]
+        const item = 6
+        const expected = [1, 2, 3, 4, 5, 6]
+        const actual = concatUniq(item, array)
+
+        expect(actual).to.deep.equal(expected)
+      })
+    })
+  })
+})
+
+describe(&#x27;wrapExample&#x27;, function () {
+  describe(&#x27;onError&#x27;, function () {
+    describe(&#x27;when previewPath is undefined&#x27;, function () {
+      it(&#x27;should return the example&#x27;, function () {
+        const example = {a: 1, b: 2, c: 3}
+        const expected = example
+        const actual = wrapExample(example)
+
+        expect(actual).to.deep.equal(expected)
+      })
+    })
+
+    describe(&#x27;when reading the file errors&#x27;, function () {
+      it(&#x27;should return the example&#x27;, function () {
+        const example = {a: 1, b: 2, c: 3, previewPath: &#x27;non-existent-file.txt&#x27;}
+        const expected = example
+        const actual = wrapExample(example)
+
+        expect(actual).to.deep.equal(expected)
+      })
+    })
+  })
+
+  describe(&#x27;onSuccess&#x27;, function () {
+    it(&#x27;should return the example with the preview in it&#x27;, function () {
+      const example = {a: 1, b: 2, c: 3, previewPath: &#x27;test/preview.txt&#x27;, preview: &#x27;qwertyuiop\n&#x27;}
+      const expected = example
+      const actual = wrapExample(example)
+
+      expect(actual).to.deep.equal(expected)
+    })
+  })
+})
+
+describe(&#x27;parseUrl&#x27;, function () {
+  describe(&#x27;onError&#x27;, function () {
+    describe(&#x27;when parse fails&#x27;, function () {
+      it(&#x27;should return null&#x27;, function () {
+        const config = &#x27;{::}&#x27;
+        const expected = null
+        const actual = parseUrl(config)
+
+        expect(actual).to.equal(expected)
+      })
+    })
+    describe(&#x27;when url is undefined&#x27;, function () {
+      it(&#x27;should return null&#x27;, function () {
+        const config = &#x27;{}&#x27;
+        const expected = null
+        const actual = parseUrl(config)
+
+        expect(actual).to.equal(expected)
+      })
+    })
+  })
+
+  describe(&#x27;onSuccess&#x27;, function () {
+    it(&#x27;should return the url&#x27;, function () {
+      const config = &#x27;{&quot;url&quot;: &quot;www.example.com&quot;}&#x27;
+      const expected = &#x27;www.example.com&#x27;
+      const actual = parseUrl(config)
+
+      expect(actual).to.equal(expected)
+    })
+  })
+})
+</textarea></div></div><div class="row centered"><footer>Flow Coverage Report generated by<a href="https://flowtype.org"> flow </a>and<a href="https://github.com/rpl/flow-coverage-report"> flow-coverage-report </a>at Sun Aug 27 2017 11:03:10 GMT-0700 (PDT)</footer></div></div><pre id="file-coverage-data" style="display:none;">{&quot;expressions&quot;:{&quot;covered_count&quot;:441,&quot;uncovered_count&quot;:0,&quot;uncovered_locs&quot;:[]},&quot;filename&quot;:&quot;test/05-A-Collection-Of-Either-Examples.spec.js&quot;,&quot;percent&quot;:100}</pre></body></html>

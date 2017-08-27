@@ -1,3 +1,4 @@
+// @flow
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
 import * as Refactor from '../src/03-Enforce-A-Null-Check.js'

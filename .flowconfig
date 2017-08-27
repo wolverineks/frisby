@@ -1,6 +1,5 @@
 [ignore]
-.*/test/.*
-.*/lib/**.*
+.*/test/corrupt-config.*
 [include]
 
 [libs]

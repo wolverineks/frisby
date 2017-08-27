@@ -1,3 +1,4 @@
+// @flow
 import { expect } from 'chai'
 import { describe, it } from 'mocha'
 import * as Refactor from '../src/02-Refactor-Imperative-Code.js'

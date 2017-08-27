@@ -26,8 +26,8 @@ export const openSite = (currentUser: { username: string } | void): string => {
 //   }
 // }
 
-export const getPrefs = (user: { preferences: string, premium: string | void }): string => {
-  const getPremiumStatus = (user: {preferences: string, premium: string | void}): Right | Left => fromNullable(user.premium)
+export const getPrefs = (user: { preferences: string, premium: boolean | void }): string => {
+  const getPremiumStatus = (user: { preferences: string, premium: boolean | void }): Right | Left => fromNullable(user.premium)
   const loadDefaultPrefs = () => 'DEFAULT_PREFERENCES'
   const loadUserPrefs = (user) => user.preferences
 
@@ -49,7 +49,7 @@ export const getPrefs = (user: { preferences: string, premium: string | void }):
 //   return 'no street'
 // }
 
-export const getStreetName = (user: { address: {} }): string => {
+export const getStreetName = (user: { address: {} | void }): string => {
   const getAddress = (user) => fromNullable(user.address)
   const getStreet = (address) => fromNullable(address.street)
   const getName = (street) => street.name
@@ -98,10 +98,10 @@ export const wrapExample = (example: { previewPath?: string }): { previewPath?: 
     .fold(onError, onSuccess)
 }
 
-// export const parseUrl = (cfg) => {
+// export const parseUrl = (config) => {
 //   const urlRegEx = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 //   try {
-//     const c = JSON.parse(cfg)
+//     const c = JSON.parse(config)
 //     if (!c.url) return null
 //     return c.url.match(urlRegEx)
 //   } catch (e) {
@@ -109,13 +109,11 @@ export const wrapExample = (example: { previewPath?: string }): { previewPath?: 
 //   }
 // }
 
-export const parseUrl = (cfg: string): string | void => {
-  const urlRegEx = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/ // eslint-disable-line no-useless-escape
-
+export const parseUrl = (config: string): string | void => {
   const onError = () => null
-  const onSuccess = (url) => url.match(urlRegEx)
+  const onSuccess = (url) => url
 
-  return tryCatch(() => JSON.parse(cfg))
+  return tryCatch(() => JSON.parse(config))
     .chain((c) => fromNullable(c.url))
     .fold(onError, onSuccess)
 }

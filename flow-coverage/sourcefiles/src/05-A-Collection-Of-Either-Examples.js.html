@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><link rel="stylesheet" href="../../assets/semantic.min.css"/><link rel="stylesheet" href="../../assets/codemirror.css"/><link rel="stylesheet" href="../../assets/flow-highlight-source.css"/><link rel="stylesheet" href="../../assets/flow-coverage-report.css"/><link rel="stylesheet" href="../../assets/codemirror-simplescrollbars-addon.css"/><script src="../../assets/jquery-3.1.0.min.js"></script><script src="../../assets/semantic.min.js"></script><script src="../../assets/semantic-tablesort.js"></script><script src="../../assets/codemirror.js"></script><script src="../../assets/codemirror-javascript-mode.js"></script><script src="../../assets/codemirror-annotatescrollbar-addon.js"></script><script src="../../assets/codemirror-simplescrollbars-addon.js"></script><script src="../../assets/flow-highlight-source.js"></script><script src="../../assets/index.js"></script><style>
+.ui .CodeMirror {
+  border: 1px solid rgba(34,36,38,.15);
+  height: auto;
+}
+</style></head><body><div class="ui grid container"><div class="row"><div class="twelve wide column"><h2 class="ui header"><a href="../../index.html" id="link-to-summary">Flow Coverage Report</a></h2></div></div><div class="row"><table class="ui small celled unstackable table"><thead><tr><th class="sorted ascending">Filename</th><th>Percent</th><th>Total</th><th>Covered</th><th>Uncovered</th></tr></thead><tbody><tr class="positive"><td class="">src/05-A-Collection-Of-Either-Examples.js</td><td><span>80 %</span></td><td> 189 </td><td> 153 </td><td> 36 </td></tr></tbody></table></div><div class="row ui one column centered grid"><div class="column" style="text-align:left;"><div class="row"><div class="ui form"><div class="fields"><div class="sixteen wide inline field"><select class="ui search dropdown uncovered-locations"><option value="">Uncovered Locations</option><option value="17">Start: 17,10 - End: 18,32</option><option value="34">Start: 34,10 - End: 35,28</option><option value="34">Start: 34,10 - End: 36,54</option><option value="53">Start: 53,23 - End: 53,26</option><option value="53">Start: 53,45 - End: 53,48</option><option value="53">Start: 53,45 - End: 53,56</option><option value="54">Start: 54,22 - End: 54,28</option><option value="54">Start: 54,47 - End: 54,53</option><option value="54">Start: 54,47 - End: 54,60</option><option value="55">Start: 55,20 - End: 55,25</option><option value="55">Start: 55,31 - End: 55,36</option><option value="55">Start: 55,31 - End: 55,41</option><option value="56">Start: 56,20 - End: 56,21</option><option value="57">Start: 57,22 - End: 57,25</option><option value="57">Start: 57,31 - End: 57,34</option><option value="59">Start: 59,10 - End: 60,22</option><option value="59">Start: 59,10 - End: 61,21</option><option value="59">Start: 59,10 - End: 62,17</option><option value="59">Start: 59,10 - End: 63,29</option><option value="75">Start: 75,10 - End: 76,57</option><option value="91">Start: 91,21 - End: 91,28</option><option value="91">Start: 91,49 - End: 91,82</option><option value="91">Start: 91,65 - End: 91,72</option><option value="93">Start: 93,22 - End: 93,28</option><option value="93">Start: 93,63 - End: 93,69</option><option value="96">Start: 96,10 - End: 97,20</option><option value="96">Start: 96,10 - End: 98,29</option><option value="116">Start: 116,22 - End: 116,24</option><option value="116">Start: 116,30 - End: 116,32</option><option value="116">Start: 116,30 - End: 116,48</option><option value="118">Start: 118,10 - End: 119,38</option><option value="118">Start: 118,10 - End: 120,29</option><option value="118">Start: 118,25 - End: 118,39</option><option value="119">Start: 119,13 - End: 119,13</option><option value="119">Start: 119,32 - End: 119,32</option><option value="119">Start: 119,32 - End: 119,36</option></select></div><div class="four wide inline field"><select class="ui search dropdown syntax-highlighting"><option value="es">ES6/ES7</option><option value="js">JavaScript</option><option value="no">None</option></select></div></div></div></div><textarea id="file-content" readonly="">// @flow
+import { Right, Left, fromNullable, tryCatch } from &#x27;./utils.js&#x27;
+import fs from &#x27;fs&#x27;
+
+// export const openSite = (currentUser) =&gt; {
+//   if (currentUser) {
+//     return renderPage(currentUser)
+//   } else {
+//     return showLogin()
+//   }
+// }
+
+export const openSite = (currentUser: { username: string } | void): string =&gt; {
+  const showLogin = () =&gt; &#x27;Please login&#x27;
+  const renderPage = (currentUser: { username: string }) =&gt; `Hello ${currentUser.username}`
+
+  return fromNullable(currentUser)
+    .fold(showLogin, renderPage)
+}
+
+// export const getPrefs = (user) =&gt; {
+//   if (user.premium) {
+//     return user.preferences
+//   } else {
+//     return &#x27;DEFAULT_PREFERENCES&#x27;
+//   }
+// }
+
+export const getPrefs = (user: { preferences: string, premium: string | void }): string =&gt; {
+  const getPremiumStatus = (user: {preferences: string, premium: string | void}): Right | Left =&gt; fromNullable(user.premium)
+  const loadDefaultPrefs = () =&gt; &#x27;DEFAULT_PREFERENCES&#x27;
+  const loadUserPrefs = (user) =&gt; user.preferences
+
+  return new Right(user)
+    .chain(getPremiumStatus)
+    .fold(loadDefaultPrefs, () =&gt; loadUserPrefs(user))
+}
+
+// export const getStreetName = (user) =&gt; {
+//   const address = user.address
+//
+//   if (address) {
+//     const street = address.street
+//
+//     if (street) {
+//       return street.name
+//     }
+//   }
+//   return &#x27;no street&#x27;
+// }
+
+export const getStreetName = (user: { address: {} }): string =&gt; {
+  const getAddress = (user) =&gt; fromNullable(user.address)
+  const getStreet = (address) =&gt; fromNullable(address.street)
+  const getName = (street) =&gt; street.name
+  const onError = (_e) =&gt; &#x27;no street&#x27;
+  const onSuccess = (name) =&gt; name
+
+  return new Right(user)
+    .chain(getAddress)
+    .chain(getStreet)
+    .map(getName)
+    .fold(onError, onSuccess)
+}
+
+// export const concatUniq = (x, ys) =&gt; {
+//   const found = ys.filter(y =&gt; y===x)[0]
+//   return foind ? ys : ys.concat(x)
+// }
+
+export const concatUniq = (x: number, ys: Array&lt;number&gt;): Array&lt;number&gt; =&gt; {
+  const combine = (x, ys) =&gt; ys.concat(x)
+  const returnOriginal = (ys) =&gt; ys
+
+  return fromNullable(ys.filter(y =&gt; y === x)[0])
+    .fold(() =&gt; combine(x, ys), () =&gt; returnOriginal(ys))
+}
+
+// export const wrapExample = (example: { previewPath?: string }): { previewPath?: string } =&gt; {
+//   if (example.previewPath) {
+//     try {
+//       example.preview = fs.readFileSync(example.previewPath)
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+//   return example
+// }
+
+export const wrapExample = (example: { previewPath?: string }): { previewPath?: string } =&gt; {
+  const readFile = (filepath) =&gt; tryCatch(() =&gt; fs.readFileSync(filepath, &#x27;utf-8&#x27;))
+  const onError = () =&gt; example
+  const onSuccess = (preview) =&gt; Object.assign({}, example, { preview })
+  // const onSuccess = (preview) =&gt; { ...example, preview )
+
+  return fromNullable(example.previewPath)
+    .chain(readFile)
+    .fold(onError, onSuccess)
+}
+
+// export const parseUrl = (cfg) =&gt; {
+//   const urlRegEx = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+//   try {
+//     const c = JSON.parse(cfg)
+//     if (!c.url) return null
+//     return c.url.match(urlRegEx)
+//   } catch (e) {
+//     return null
+//   }
+// }
+
+export const parseUrl = (cfg: string): string | void =&gt; {
+  const urlRegEx = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/ // eslint-disable-line no-useless-escape
+
+  const onError = () =&gt; null
+  const onSuccess = (url) =&gt; url.match(urlRegEx)
+
+  return tryCatch(() =&gt; JSON.parse(cfg))
+    .chain((c) =&gt; fromNullable(c.url))
+    .fold(onError, onSuccess)
+}
+</textarea></div></div><div class="row centered"><footer>Flow Coverage Report generated by<a href="https://flowtype.org"> flow </a>and<a href="https://github.com/rpl/flow-coverage-report"> flow-coverage-report </a>at Sun Aug 27 2017 09:44:40 GMT-0700 (PDT)</footer></div></div><pre id="file-coverage-data" style="display:none;">{&quot;expressions&quot;:{&quot;covered_count&quot;:153,&quot;uncovered_count&quot;:36,&quot;uncovered_locs&quot;:[{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:17,&quot;column&quot;:10,&quot;offset&quot;:479},&quot;end&quot;:{&quot;line&quot;:18,&quot;column&quot;:32,&quot;offset&quot;:537}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:34,&quot;column&quot;:10,&quot;offset&quot;:1033},&quot;end&quot;:{&quot;line&quot;:35,&quot;column&quot;:28,&quot;offset&quot;:1077}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:34,&quot;column&quot;:10,&quot;offset&quot;:1033},&quot;end&quot;:{&quot;line&quot;:36,&quot;column&quot;:54,&quot;offset&quot;:1132}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:53,&quot;column&quot;:23,&quot;offset&quot;:1460},&quot;end&quot;:{&quot;line&quot;:53,&quot;column&quot;:26,&quot;offset&quot;:1464}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:53,&quot;column&quot;:45,&quot;offset&quot;:1482},&quot;end&quot;:{&quot;line&quot;:53,&quot;column&quot;:48,&quot;offset&quot;:1486}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:53,&quot;column&quot;:45,&quot;offset&quot;:1482},&quot;end&quot;:{&quot;line&quot;:53,&quot;column&quot;:56,&quot;offset&quot;:1494}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:54,&quot;column&quot;:22,&quot;offset&quot;:1517},&quot;end&quot;:{&quot;line&quot;:54,&quot;column&quot;:28,&quot;offset&quot;:1524}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:54,&quot;column&quot;:47,&quot;offset&quot;:1542},&quot;end&quot;:{&quot;line&quot;:54,&quot;column&quot;:53,&quot;offset&quot;:1549}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:54,&quot;column&quot;:47,&quot;offset&quot;:1542},&quot;end&quot;:{&quot;line&quot;:54,&quot;column&quot;:60,&quot;offset&quot;:1556}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:55,&quot;column&quot;:20,&quot;offset&quot;:1577},&quot;end&quot;:{&quot;line&quot;:55,&quot;column&quot;:25,&quot;offset&quot;:1583}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:55,&quot;column&quot;:31,&quot;offset&quot;:1588},&quot;end&quot;:{&quot;line&quot;:55,&quot;column&quot;:36,&quot;offset&quot;:1594}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:55,&quot;column&quot;:31,&quot;offset&quot;:1588},&quot;end&quot;:{&quot;line&quot;:55,&quot;column&quot;:41,&quot;offset&quot;:1599}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:56,&quot;column&quot;:20,&quot;offset&quot;:1619},&quot;end&quot;:{&quot;line&quot;:56,&quot;column&quot;:21,&quot;offset&quot;:1621}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:57,&quot;column&quot;:22,&quot;offset&quot;:1659},&quot;end&quot;:{&quot;line&quot;:57,&quot;column&quot;:25,&quot;offset&quot;:1663}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:57,&quot;column&quot;:31,&quot;offset&quot;:1668},&quot;end&quot;:{&quot;line&quot;:57,&quot;column&quot;:34,&quot;offset&quot;:1672}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:59,&quot;column&quot;:10,&quot;offset&quot;:1683},&quot;end&quot;:{&quot;line&quot;:60,&quot;column&quot;:22,&quot;offset&quot;:1721}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:59,&quot;column&quot;:10,&quot;offset&quot;:1683},&quot;end&quot;:{&quot;line&quot;:61,&quot;column&quot;:21,&quot;offset&quot;:1743}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:59,&quot;column&quot;:10,&quot;offset&quot;:1683},&quot;end&quot;:{&quot;line&quot;:62,&quot;column&quot;:17,&quot;offset&quot;:1761}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:59,&quot;column&quot;:10,&quot;offset&quot;:1683},&quot;end&quot;:{&quot;line&quot;:63,&quot;column&quot;:29,&quot;offset&quot;:1791}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:75,&quot;column&quot;:10,&quot;offset&quot;:2090},&quot;end&quot;:{&quot;line&quot;:76,&quot;column&quot;:57,&quot;offset&quot;:2188}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:21,&quot;offset&quot;:2599},&quot;end&quot;:{&quot;line&quot;:91,&quot;column&quot;:28,&quot;offset&quot;:2607}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:49,&quot;offset&quot;:2627},&quot;end&quot;:{&quot;line&quot;:91,&quot;column&quot;:82,&quot;offset&quot;:2661}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:65,&quot;offset&quot;:2643},&quot;end&quot;:{&quot;line&quot;:91,&quot;column&quot;:72,&quot;offset&quot;:2651}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:93,&quot;column&quot;:22,&quot;offset&quot;:2716},&quot;end&quot;:{&quot;line&quot;:93,&quot;column&quot;:28,&quot;offset&quot;:2723}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:93,&quot;column&quot;:63,&quot;offset&quot;:2757},&quot;end&quot;:{&quot;line&quot;:93,&quot;column&quot;:69,&quot;offset&quot;:2764}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:96,&quot;column&quot;:10,&quot;offset&quot;:2838},&quot;end&quot;:{&quot;line&quot;:97,&quot;column&quot;:20,&quot;offset&quot;:2892}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:96,&quot;column&quot;:10,&quot;offset&quot;:2838},&quot;end&quot;:{&quot;line&quot;:98,&quot;column&quot;:29,&quot;offset&quot;:2922}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:116,&quot;column&quot;:22,&quot;offset&quot;:3447},&quot;end&quot;:{&quot;line&quot;:116,&quot;column&quot;:24,&quot;offset&quot;:3450}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:116,&quot;column&quot;:30,&quot;offset&quot;:3455},&quot;end&quot;:{&quot;line&quot;:116,&quot;column&quot;:32,&quot;offset&quot;:3458}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:116,&quot;column&quot;:30,&quot;offset&quot;:3455},&quot;end&quot;:{&quot;line&quot;:116,&quot;column&quot;:48,&quot;offset&quot;:3474}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:10,&quot;offset&quot;:3485},&quot;end&quot;:{&quot;line&quot;:119,&quot;column&quot;:38,&quot;offset&quot;:3555}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:10,&quot;offset&quot;:3485},&quot;end&quot;:{&quot;line&quot;:120,&quot;column&quot;:29,&quot;offset&quot;:3585}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:118,&quot;column&quot;:25,&quot;offset&quot;:3500},&quot;end&quot;:{&quot;line&quot;:118,&quot;column&quot;:39,&quot;offset&quot;:3515}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:119,&quot;column&quot;:13,&quot;offset&quot;:3529},&quot;end&quot;:{&quot;line&quot;:119,&quot;column&quot;:13,&quot;offset&quot;:3530}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:119,&quot;column&quot;:32,&quot;offset&quot;:3548},&quot;end&quot;:{&quot;line&quot;:119,&quot;column&quot;:32,&quot;offset&quot;:3549}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:119,&quot;column&quot;:32,&quot;offset&quot;:3548},&quot;end&quot;:{&quot;line&quot;:119,&quot;column&quot;:36,&quot;offset&quot;:3553}}]},&quot;filename&quot;:&quot;src/05-A-Collection-Of-Either-Examples.js&quot;,&quot;percent&quot;:80}</pre></body></html>

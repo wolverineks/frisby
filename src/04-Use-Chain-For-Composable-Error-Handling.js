@@ -12,7 +12,7 @@ import { Right, tryCatch } from './utils.js'
 //   }
 // }
 
-export const getPort = (filepath: string) => {
+export const getPort = (filepath: string): number => {
   const DEFAULT_PORT = 3000
   const readFile = () => tryCatch(() => fs.readFileSync(filepath))
   const parse = (configString) => tryCatch(() => JSON.parse(configString))

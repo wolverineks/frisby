@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><link rel="stylesheet" href="../../assets/semantic.min.css"/><link rel="stylesheet" href="../../assets/codemirror.css"/><link rel="stylesheet" href="../../assets/flow-highlight-source.css"/><link rel="stylesheet" href="../../assets/flow-coverage-report.css"/><link rel="stylesheet" href="../../assets/codemirror-simplescrollbars-addon.css"/><script src="../../assets/jquery-3.1.0.min.js"></script><script src="../../assets/semantic.min.js"></script><script src="../../assets/semantic-tablesort.js"></script><script src="../../assets/codemirror.js"></script><script src="../../assets/codemirror-javascript-mode.js"></script><script src="../../assets/codemirror-annotatescrollbar-addon.js"></script><script src="../../assets/codemirror-simplescrollbars-addon.js"></script><script src="../../assets/flow-highlight-source.js"></script><script src="../../assets/index.js"></script><style>
+.ui .CodeMirror {
+  border: 1px solid rgba(34,36,38,.15);
+  height: auto;
+}
+</style></head><body><div class="ui grid container"><div class="row"><div class="twelve wide column"><h2 class="ui header"><a href="../../index.html" id="link-to-summary">Flow Coverage Report</a></h2></div></div><div class="row"><table class="ui small celled unstackable table"><thead><tr><th class="sorted ascending">Filename</th><th>Percent</th><th>Total</th><th>Covered</th><th>Uncovered</th></tr></thead><tbody><tr class="positive"><td class="">test/02-Refactor-Imperative-Code.spec.js</td><td><span>94 %</span></td><td> 239 </td><td> 226 </td><td> 13 </td></tr></tbody></table></div><div class="row ui one column centered grid"><div class="column" style="text-align:left;"><div class="row"><div class="ui form"><div class="fields"><div class="sixteen wide inline field"><select class="ui search dropdown uncovered-locations"><option value="">Uncovered Locations</option><option value="64">Start: 64,11 - End: 64,16</option><option value="64">Start: 64,20 - End: 64,41</option><option value="64">Start: 64,20 - End: 64,49</option><option value="66">Start: 66,12 - End: 66,17</option><option value="74">Start: 74,11 - End: 74,16</option><option value="74">Start: 74,20 - End: 74,39</option><option value="74">Start: 74,20 - End: 74,47</option><option value="76">Start: 76,12 - End: 76,17</option><option value="95">Start: 95,11 - End: 95,16</option><option value="95">Start: 95,20 - End: 95,61</option><option value="97">Start: 97,20 - End: 97,25</option><option value="101">Start: 101,18 - End: 101,23</option><option value="101">Start: 101,39 - End: 101,44</option></select></div><div class="four wide inline field"><select class="ui search dropdown syntax-highlighting"><option value="es">ES6/ES7</option><option value="js">JavaScript</option><option value="no">None</option></select></div></div></div></div><textarea id="file-content" readonly="">// @flow
+import { expect } from &#x27;chai&#x27;
+import { describe, it } from &#x27;mocha&#x27;
+import * as Refactor from &#x27;../src/02-Refactor-Imperative-Code.js&#x27;
+const {
+  stripDollarSign,
+  stripPercentSign,
+  moneyToFloat,
+  percentToFloat,
+  percentToPercentDecimal,
+  applyDiscount
+} = Refactor
+
+describe(&#x27;stripDollarSign&#x27;, function () {
+  it(&#x27;should strip dollar signs at the start of a string&#x27;, function () {
+    const target = &#x27;123123123&#x27;
+    const start = &#x27;$&#x27; + target
+
+    expect(stripDollarSign(start)).to.equal(target)
+  })
+
+  it(&#x27;should strip dollar signs at the middle of a string&#x27;, function () {
+    const target = &#x27;123123123&#x27;
+    const middle = target.slice(0, 4) + &#x27;$&#x27; + target.slice(4, target.length)
+
+    expect(stripDollarSign(middle)).to.equal(target)
+  })
+
+  it(&#x27;should strip dollar signs at the end of a string&#x27;, function () {
+    const target = &#x27;123123123&#x27;
+    const end = target + &#x27;$&#x27;
+
+    expect(stripDollarSign(end)).to.equal(target)
+  })
+})
+
+describe(&#x27;stripPercentSign&#x27;, function () {
+  it(&#x27;should strip percent signs at the start of a string&#x27;, function () {
+    const target = &#x27;123123123&#x27;
+    const start = &#x27;%&#x27; + target
+
+    expect(stripPercentSign(start)).to.equal(target)
+  })
+
+  it(&#x27;should strip percent signs at the middle of a string&#x27;, function () {
+    const target = &#x27;123123123&#x27;
+    const middle = target.slice(0, 4) + &#x27;%&#x27; + target.slice(4, target.length)
+
+    expect(stripPercentSign(middle)).to.equal(target)
+  })
+
+  it(&#x27;should strip percent signs at the end of a string&#x27;, function () {
+    const target = &#x27;123123123&#x27;
+    const end = target + &#x27;%&#x27;
+
+    expect(stripPercentSign(end)).to.equal(target)
+  })
+})
+
+describe(&#x27;percentToFloat&#x27;, function () {
+  it(&#x27;should convert a moneyString to a float&#x27;, function () {
+    const before = &#x27;20%&#x27;
+    const after = 0.20
+    const result = percentToFloat(before).unBox()
+
+    expect(result).to.equal(after)
+  })
+})
+
+describe(&#x27;moneyToFloat&#x27;, function () {
+  it(&#x27;should convert a moneyString to a float&#x27;, function () {
+    const before = &#x27;$20.00&#x27;
+    const after = 20.00
+    const result = moneyToFloat(before).unBox()
+
+    expect(result).to.equal(after)
+  })
+})
+
+describe(&#x27;percentToPercentDecimal&#x27;, function () {
+  it(&#x27;should convert a float to a percentage&#x27;, function () {
+    const percent = 20
+    const expected = 0.2
+    const actual = percentToPercentDecimal(percent)
+
+    expect(actual).to.equal(expected)
+  })
+})
+
+describe(&#x27;applyDiscount&#x27;, function () {
+  it(&#x27;should return float after applying discount&#x27;, function () {
+    const priceString = &#x27;$5.00&#x27;
+    const discountString = &#x27;20%&#x27;
+    const expected = 4.00
+    const actual = applyDiscount(priceString, discountString)
+
+    return compare(actual, expected)
+  })
+})
+
+const compare = (actual, expected) =&gt; actual === expected
+</textarea></div></div><div class="row centered"><footer>Flow Coverage Report generated by<a href="https://flowtype.org"> flow </a>and<a href="https://github.com/rpl/flow-coverage-report"> flow-coverage-report </a>at Sun Aug 27 2017 11:03:10 GMT-0700 (PDT)</footer></div></div><pre id="file-coverage-data" style="display:none;">{&quot;expressions&quot;:{&quot;covered_count&quot;:226,&quot;uncovered_count&quot;:13,&quot;uncovered_locs&quot;:[{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:64,&quot;column&quot;:11,&quot;offset&quot;:1786},&quot;end&quot;:{&quot;line&quot;:64,&quot;column&quot;:16,&quot;offset&quot;:1792}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:64,&quot;column&quot;:20,&quot;offset&quot;:1795},&quot;end&quot;:{&quot;line&quot;:64,&quot;column&quot;:41,&quot;offset&quot;:1817}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:64,&quot;column&quot;:20,&quot;offset&quot;:1795},&quot;end&quot;:{&quot;line&quot;:64,&quot;column&quot;:49,&quot;offset&quot;:1825}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:66,&quot;column&quot;:12,&quot;offset&quot;:1838},&quot;end&quot;:{&quot;line&quot;:66,&quot;column&quot;:17,&quot;offset&quot;:1844}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:74,&quot;column&quot;:11,&quot;offset&quot;:2034},&quot;end&quot;:{&quot;line&quot;:74,&quot;column&quot;:16,&quot;offset&quot;:2040}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:74,&quot;column&quot;:20,&quot;offset&quot;:2043},&quot;end&quot;:{&quot;line&quot;:74,&quot;column&quot;:39,&quot;offset&quot;:2063}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:74,&quot;column&quot;:20,&quot;offset&quot;:2043},&quot;end&quot;:{&quot;line&quot;:74,&quot;column&quot;:47,&quot;offset&quot;:2071}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:76,&quot;column&quot;:12,&quot;offset&quot;:2084},&quot;end&quot;:{&quot;line&quot;:76,&quot;column&quot;:17,&quot;offset&quot;:2090}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:95,&quot;column&quot;:11,&quot;offset&quot;:2583},&quot;end&quot;:{&quot;line&quot;:95,&quot;column&quot;:16,&quot;offset&quot;:2589}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:95,&quot;column&quot;:20,&quot;offset&quot;:2592},&quot;end&quot;:{&quot;line&quot;:95,&quot;column&quot;:61,&quot;offset&quot;:2634}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:97,&quot;column&quot;:20,&quot;offset&quot;:2655},&quot;end&quot;:{&quot;line&quot;:97,&quot;column&quot;:25,&quot;offset&quot;:2661}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:101,&quot;column&quot;:18,&quot;offset&quot;:2699},&quot;end&quot;:{&quot;line&quot;:101,&quot;column&quot;:23,&quot;offset&quot;:2705}},{&quot;source&quot;:&quot;/Users/kevinsullivan/projects/Frisby/test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;type&quot;:&quot;SourceFile&quot;,&quot;start&quot;:{&quot;line&quot;:101,&quot;column&quot;:39,&quot;offset&quot;:2720},&quot;end&quot;:{&quot;line&quot;:101,&quot;column&quot;:44,&quot;offset&quot;:2726}}]},&quot;filename&quot;:&quot;test/02-Refactor-Imperative-Code.spec.js&quot;,&quot;percent&quot;:94}</pre></body></html>

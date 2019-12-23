@@ -47,7 +47,7 @@
     "immutable": "^3.8.1",
     "immutable-ext": "^1.1.2",
     "mocha": "^3.4.2",
-    "nyc": "^11.0.3",
+    "nyc": "^15.0.0",
     "prettier": "^1.5.3",
     "standard": "^10.0.2"
   },
